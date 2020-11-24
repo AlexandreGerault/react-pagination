@@ -1,26 +1,21 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import ReactDOM from 'react-dom'
-import Pagination from './components/Pagination'
-import usePagination from './hooks/usePagination'
+import DataTable from './components/DataTable/DataTable'
 import './tailwind.output.css'
 
+// http://127.0.0.1:8000/api/user
 function App() {
-  const [page, prevPage, nextPage, goToPage, last] = usePagination({
-    initialPage: 1,
-    maxPages: 6,
-  })
-
   return (
-    <>
-      <p>This is page {page}</p>
-      <Pagination
-        page={page}
-        prevPage={prevPage}
-        nextPage={nextPage}
-        goToPage={goToPage}
-        last={last}
-      />
-    </>
+    <DataTable
+      endpoint="http://127.0.0.1:8000/api/user"
+      perPage={3}
+      columns={[
+        {label: 'Prénom', name: 'firstname'},
+        {label: 'Nom', name: 'lastname'},
+        {label: 'Adresse mail', name: 'email'},
+        {label: 'Rôle', name: 'role'},
+      ]}
+    />
   )
 }
 
