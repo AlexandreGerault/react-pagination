@@ -1,5 +1,4 @@
 import React from 'react'
-import usePagination from '../hooks/usePagination'
 import PaginationButton from './PaginationButton'
 
 const Pagination = ({page, prevPage, nextPage, goToPage, last}) => {

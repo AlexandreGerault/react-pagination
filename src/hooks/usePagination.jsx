@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import {useState} from 'react'
 
 const usePagination = ({initialPage = 1, maxPages} = {}) => {
   const [page, setPage] = useState(initialPage)
@@ -15,7 +15,7 @@ const usePagination = ({initialPage = 1, maxPages} = {}) => {
     i >= 1 && i <= maxPages ? setPage(i) : setPage(page)
   }
 
-  return [page, prevPage, nextPage, goTo]
+  return [page, prevPage, nextPage, goTo, maxPages]
 }
 
 export default usePagination

@@ -5,10 +5,9 @@ import usePagination from './hooks/usePagination'
 import './tailwind.output.css'
 
 function App() {
-  const maxPages = 10
-  const [page, prevPage, nextPage, goToPage] = usePagination({
+  const [page, prevPage, nextPage, goToPage, last] = usePagination({
     initialPage: 1,
-    maxPages: maxPages,
+    maxPages: 10,
   })
 
   return (
@@ -19,7 +18,7 @@ function App() {
         prevPage={prevPage}
         nextPage={nextPage}
         goToPage={goToPage}
-        last={maxPages}
+        last={last}
       />
     </>
   )
