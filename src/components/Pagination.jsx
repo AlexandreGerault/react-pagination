@@ -1,19 +1,45 @@
 import React from 'react'
+import ButtonSeparator from './ButtonSeparator'
 import PaginationButton from './PaginationButton'
 
 const Pagination = ({page, prevPage, nextPage, goToPage, last}) => {
-  const pages = [...Array(last).fill(null)].map((current, index) => {
-    const disabled = page === index + 1
-    return (
+  const pages = {}
+  if (page <= 3) {
+    pages.left = 4
+    pages.middle = 0
+    pages.right = 3
+  } else if (page >= 3 && page <= last - 3) {
+    pages.left = 1
+    pages.middle = 3
+    pages.right = 1
+  } else {
+    pages.left = 3
+    pages.middle = 0
+    pages.right = 4
+  }
+  const left = [...Array(pages.left).fill(null)].map((_, i) => (
+    <PaginationButton onClick={() => goToPage(i + 1)} disabled={i + 1 === page}>
+      {i + 1}
+    </PaginationButton>
+  ))
+  const middle = [...Array(pages.middle).fill(null)].map((_, i) => (
+    <PaginationButton
+      onClick={() => goToPage(i + page - 1)}
+      disabled={i + page - 1 === page}
+    >
+      {i + page - 1}
+    </PaginationButton>
+  ))
+  const right = [...Array(pages.right).fill(null)]
+    .map((_, i) => (
       <PaginationButton
-        key={index + 1}
-        onClick={() => goToPage(index + 1)}
-        disabled={disabled}
+        onClick={() => goToPage(last - i)}
+        disabled={last - i === page}
       >
-        {index + 1}
+        {last - i}
       </PaginationButton>
-    )
-  })
+    ))
+    .reverse()
 
   return (
     <nav
@@ -36,7 +62,11 @@ const Pagination = ({page, prevPage, nextPage, goToPage, last}) => {
           />
         </svg>
       </PaginationButton>
-      {pages}
+      {left}
+      <ButtonSeparator />
+      {middle.length > 0 && middle}
+      {middle.length > 0 && <ButtonSeparator />}
+      {right}
       <PaginationButton onClick={() => nextPage()}>
         <span className="sr-only">Next</span>
         <svg
