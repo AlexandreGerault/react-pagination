@@ -4,11 +4,11 @@ const usePagination = ({initialPage = 1, maxPages} = {}) => {
   const [page, setPage] = useState(initialPage)
 
   const prevPage = () => {
-    page - 1 > 1 ? setPage(page - 1) : setPage(page)
+    page - 1 >= 1 ? setPage(page - 1) : setPage(page)
   }
 
   const nextPage = () => {
-    page + 1 < maxPages ? setPage(page + 1) : setPage(page)
+    page + 1 <= maxPages ? setPage(page + 1) : setPage(page)
   }
 
   const goTo = i => {
