@@ -18,12 +18,17 @@ const Pagination = ({page, prevPage, nextPage, goToPage, last}) => {
     pages.right = 4
   }
   const left = [...Array(pages.left).fill(null)].map((_, i) => (
-    <PaginationButton onClick={() => goToPage(i + 1)} disabled={i + 1 === page}>
+    <PaginationButton
+      key={i + 1}
+      onClick={() => goToPage(i + 1)}
+      disabled={i + 1 === page}
+    >
       {i + 1}
     </PaginationButton>
   ))
   const middle = [...Array(pages.middle).fill(null)].map((_, i) => (
     <PaginationButton
+      key={i + page - 1}
       onClick={() => goToPage(i + page - 1)}
       disabled={i + page - 1 === page}
     >
@@ -33,6 +38,7 @@ const Pagination = ({page, prevPage, nextPage, goToPage, last}) => {
   const right = [...Array(pages.right).fill(null)]
     .map((_, i) => (
       <PaginationButton
+        key={last - i}
         onClick={() => goToPage(last - i)}
         disabled={last - i === page}
       >
@@ -46,7 +52,7 @@ const Pagination = ({page, prevPage, nextPage, goToPage, last}) => {
       className="relative z-0 inline-flex shadow-sm -space-x-px"
       aria-label="Pagination"
     >
-      <PaginationButton onClick={() => prevPage()}>
+      <PaginationButton onClick={() => prevPage()} rounded="left">
         <span className="sr-only">Previous</span>
         <svg
           className="h-5 w-5"
@@ -67,7 +73,7 @@ const Pagination = ({page, prevPage, nextPage, goToPage, last}) => {
       {middle.length > 0 && middle}
       {middle.length > 0 && <ButtonSeparator />}
       {right}
-      <PaginationButton onClick={() => nextPage()}>
+      <PaginationButton onClick={() => nextPage()} rounded="right">
         <span className="sr-only">Next</span>
         <svg
           className="h-5 w-5"
