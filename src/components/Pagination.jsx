@@ -4,7 +4,11 @@ import PaginationButton from './PaginationButton'
 
 const Pagination = ({page, prevPage, nextPage, goToPage, last}) => {
   const pages = {}
-  if (page <= 3) {
+  if (last < 8) {
+    pages.left = last
+    pages.middle = 0
+    pages.right = 0
+  } else if (page <= 3) {
     pages.left = 4
     pages.middle = 0
     pages.right = 3
@@ -69,7 +73,7 @@ const Pagination = ({page, prevPage, nextPage, goToPage, last}) => {
         </svg>
       </PaginationButton>
       {left}
-      <ButtonSeparator />
+      {middle.length > 0 || right.length > 0 ? <ButtonSeparator /> : ''}
       {middle.length > 0 && middle}
       {middle.length > 0 && <ButtonSeparator />}
       {right}

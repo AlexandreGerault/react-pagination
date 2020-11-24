@@ -7,7 +7,7 @@ import './tailwind.output.css'
 function App() {
   const [page, prevPage, nextPage, goToPage, last] = usePagination({
     initialPage: 1,
-    maxPages: 10,
+    maxPages: 6,
   })
 
   return (
