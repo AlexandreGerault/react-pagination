@@ -2,14 +2,9 @@ import React from 'react'
 import usePagination from '../hooks/usePagination'
 import PaginationButton from './PaginationButton'
 
-const Pagination = ({last}) => {
-  const [paginationPage, prevPage, nextPage, goToPage] = usePagination({
-    initialPage: 1,
-    maxPages: last,
-  })
-
-  const pages = [...Array(last).fill(null)].map((page, index) => {
-    const disabled = paginationPage === index + 1
+const Pagination = ({page, prevPage, nextPage, goToPage, last}) => {
+  const pages = [...Array(last).fill(null)].map((current, index) => {
+    const disabled = page === index + 1
     return (
       <PaginationButton
         key={index + 1}
